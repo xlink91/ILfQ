@@ -1,0 +1,1 @@
+﻿{ "Poll.Question" : { $and: [ { $regex: "ue" }, { _id: { $eq: ObjectId("5deaa00b118fe938197abb4b") } } ] } }

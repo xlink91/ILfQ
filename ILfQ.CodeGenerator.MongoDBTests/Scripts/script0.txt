@@ -1,0 +1,1 @@
+﻿{$and: [{$and: [{$and: [{ itd_communicationType: { $lte: 1}} , { itd_ip: { $ne: null } }, { itd_port: { $ne: null } }]}, { itd_isPinpad: { $eq: true } }]}, { installationDate: { $eq: ISODate("2019-10-04 03:00:00.0") } }]}
