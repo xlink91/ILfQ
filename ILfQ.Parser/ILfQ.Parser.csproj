@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,28 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-Net461|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug-Net461\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net461|AnyCPU'">
+    <OutputPath>bin\Release-Net461\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -51,4 +74,44 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>IF ($(ConfigurationName)) == (Release) GOTO RELEASE_NET472
+IF ($(ConfigurationName)) == (Debug) GOTO DEBUG_NET472
+IF ($(ConfigurationName)) == (Release-Net461) GOTO RELEASE_NET461
+IF ($(ConfigurationName)) == (Debug-Net461) GOTO DEBUG_NET461
+GOTO END
+:RELEASE_NET472
+    IF NOT EXIST $(SolutionDir)ILfQ.NugetBuild\bin\release\dll\net472 mkdir $(SolutionDir)ILfQ.NugetBuild\bin\release\dll\net472
+    GOTO END
+:DEBUG_NET472
+    IF NOT EXIST $(SolutionDir)ILfQ.NugetBuild\bin\debug\dll\net472 mkdir $(SolutionDir)ILfQ.NugetBuild\bin\debug\dll\net472
+    GOTO END
+:RELEASE_NET461
+    IF NOT EXIST $(SolutionDir)ILfQ.NugetBuild\bin\release\dll\net461 mkdir $(SolutionDir)ILfQ.NugetBuild\bin\release\dll\net461
+    GOTO END
+:DEBUG_NET461
+   IF NOT EXIST $(SolutionDir)ILfQ.NugetBuild\bin\debug\dll\net461 mkdir $(SolutionDir)ILfQ.NugetBuild\bin\debug\dll\net461
+   GOTO END
+:END</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>IF ($(ConfigurationName)) == (Release) GOTO RELEASE_NET472
+IF ($(ConfigurationName)) == (Debug) GOTO DEBUG_NET472
+IF ($(ConfigurationName)) == (Release-Net461) GOTO RELEASE_NET461
+IF ($(ConfigurationName)) == (Debug-Net461) GOTO DEBUG_NET461
+GOTO END
+:RELEASE_NET472
+    COPY /y $(ProjectDir)bin\Release\ILfQ*.dll $(SolutionDir)ILfQ.NugetBuild\bin\release\dll\net472
+    GOTO END
+:RELEASE_NET461
+    COPY /y $(ProjectDir)bin\Release-Net461\ILfQ*.dll $(SolutionDir)ILfQ.NugetBuild\bin\release\dll\net461
+    GOTO END
+:DEBUG_NET472
+    COPY /y $(ProjectDir)bin\Debug\ILfQ*.dll $(SolutionDir)ILfQ.NugetBuild\bin\debug\dll\net472
+    GOTO END
+:DEBUG_NET461
+    COPY /y $(ProjectDir)bin\Debug-Net461\ILfQ*.dll $(SolutionDir)ILfQ.NugetBuild\bin\debug\dll\net461
+    GOTO END
+:END</PostBuildEvent>
+  </PropertyGroup>
 </Project>

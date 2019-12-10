@@ -55,6 +55,7 @@
 
     <!-- A readme.txt to display when the package is installed -->
     <files>
-		  <file src="..\ILfQ.CodeGenerator.MongoDB.dll" target="lib\net461" />
+		  <file src="..\dll\net461\ILfQ.CodeGenerator.MongoDB.dll" target="lib\net461" />
+		  <file src="..\dll\net472\ILfQ.CodeGenerator.MongoDB.dll" target="lib\net472" />
     </files>
 </package>

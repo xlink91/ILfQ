@@ -56,9 +56,13 @@
 
     <!-- A readme.txt to display when the package is installed -->
     <files>
-      <file src="..\ILfQ.Definitions.dll" target="lib\net461" />
-		  <file src="..\ILfQ.Lexer.dll" target="lib\net461" />
-		  <file src="..\ILfQ.Parser.dll" target="lib\net461" />
-		  <file src="..\ILfQ.dll" target="lib\net461" />
+      <file src="..\dll\net461\ILfQ.Definitions.dll" target="lib\net461" />
+		  <file src="..\dll\net461\ILfQ.Lexer.dll" target="lib\net461" />
+		  <file src="..\dll\net461\ILfQ.Parser.dll" target="lib\net461" />
+		  <file src="..\dll\net461\ILfQ.dll" target="lib\net461" />
+      <file src="..\dll\net472\ILfQ.Definitions.dll" target="lib\net472" />
+		  <file src="..\dll\net472\ILfQ.Lexer.dll" target="lib\net472" />
+		  <file src="..\dll\net472\ILfQ.Parser.dll" target="lib\net472" />
+		  <file src="..\dll\net472\ILfQ.dll" target="lib\net472" />
     </files>
 </package>
